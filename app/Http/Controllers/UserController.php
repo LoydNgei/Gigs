@@ -36,7 +36,7 @@ class UserController extends Controller
 
         if(auth()->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect('/')->with('message', 'You are now logged in');
+            return redirect()->route('listing.form')->with('message', 'You are now logged in');
         }
         return back()->withErrors(['email' => 'Invalid credentials'])->onlyInput('email');
     }

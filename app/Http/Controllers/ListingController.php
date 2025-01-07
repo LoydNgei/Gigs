@@ -2,20 +2,25 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use Illuminate\Http\Rule;
+use Illuminate\Validation\Rule;
 use App\Models\Listing;
 
 class ListingController extends Controller
 {
     // Show all listings
     public function showlistings() {
+        // Add pagination on the listing later
         $listings = Listing::all();
         return view('listings.index', compact('listings'));
     }
 
     // Show a single listing
-    public function singlelisting(){
-        return view('listings.singlelisting');
+    public function singlelisting(Listing $id){
+        $listing = Listing::find($id);
+        if (!$listing) {
+            abort(404, 'No Listing found');
+        }
+        return view('listings.singlelisting', compact('listing'));
     }
 
     // Show listing form
@@ -41,12 +46,12 @@ class ListingController extends Controller
     }
 
     // Go to an edit mode for a list
-    public function edit(Listing $listing) {
-        return view('listings.edit', ['listing' => $listing]);
+    public function edit(Listing $id) {
+        return view('listings.edit', ['listing' => $id]);
     }
 
     // Update a listing
-    public function update(Request $request, Listing $listing) {
+    public function update(Request $request, Listing $id) {
         $listingFields = $request->validate([
             'title' => 'required',
             'company' => ['required'],
@@ -56,7 +61,7 @@ class ListingController extends Controller
             'tags' => 'required',
             'description' => 'required'
         ]);
-        $listing->update($formFields);
+        $id->update($formFields);
         return redirect('/')->with('message', 'Listing updated successfully');
     }
 
@@ -67,8 +72,8 @@ class ListingController extends Controller
 
     // Delete a Listing
 
-    public function destroy(Listing $listing) {
-        $listing->delete();
+    public function destroy(Listing $id) {
+        $id->delete();
         return redirect('/')->with('message', 'Listing deleted successfully');
     }
 

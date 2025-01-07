@@ -73,11 +73,9 @@
                     {{ $slot }}
                 </main>
 
-                <footer
-                class="w-full flex items-center justify-start font-bold bg-black text-white h-16 opacity-70 md:justify-center">
+            <footer class="w-full flex items-center justify-start font-bold bg-black text-white h-16 opacity-70 md:justify-center">
                 <p class="ml-2">Copyright &copy; 2022, All Rights reserved</p>
-                <button href="/listings/create" class="absolute top-1/3 right-10 bg-black text-white py-2 px-5">Post Job</button>
-                </footer>
+            </footer>
         <x-flash-message />
     </body>
 </html>

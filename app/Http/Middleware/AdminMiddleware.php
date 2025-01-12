@@ -16,9 +16,9 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::check() && Auth::user()->is_admin){
-            return $next($request);
-        }
-        return redirect()->route('home')->with('message', 'You are not authorized');
+        // if (Auth::check() && Auth::user()->is_admin){
+        //     return $next($request);
+        // }
+        // return redirect()->route('home')->with('message', 'You are not authorized');
     }
 }

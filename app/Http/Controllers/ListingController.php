@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Listing;
+use App\Models\User;
 
 class ListingController extends Controller
 {
@@ -15,12 +17,8 @@ class ListingController extends Controller
     }
 
     // Show a single listing
-    public function singlelisting(Listing $id){
-        $listing = Listing::find($id);
-        if (!$listing) {
-            abort(404, 'No Listing found');
-        }
-        return view('listings.singlelisting', compact('listing'));
+    public function singlelisting(Listing $listing){
+        return view('listings.singlelisting', ['listing' => $listing]);
     }
 
     // Show listing form
@@ -40,15 +38,18 @@ class ListingController extends Controller
             'description' => 'required'
         ]);
 
+        $listingFields['user_id'] = auth()->id();
+
         Listing::create($listingFields);
 
         return redirect('/')->with('message', 'Listing created successfully');
     }
 
-    // Go to an edit mode for a list
-    public function edit(Listing $id) {
-        return view('listings.edit', ['listing' => $id]);
+    // Go to an edit mode for a listing
+    public function edit(Listing $listing) {
+        return view('listings.edit', ['listing' => $listing]);
     }
+
 
     // Update a listing
     public function update(Request $request, Listing $id) {

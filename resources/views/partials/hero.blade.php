@@ -11,7 +11,7 @@
     </p>
 
     <div>
-        <a href="{{route('listings.form') }}" class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black">
+        <a href="{{route('listing.form') }}" class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black">
             Post a Gig
         </a>
         <a href="{{ route('listing.show') }}"class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black">

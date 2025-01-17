@@ -18,7 +18,7 @@ class ListingController extends Controller
 
     // Show a single listing
     public function singlelisting(Listing $listing){
-        return view('listings.singlelisting', ['listing' => $listing]);
+        return view('listings.singlelisting', compact('listing'));
     }
 
     // Show listing form
@@ -41,13 +41,12 @@ class ListingController extends Controller
         $listingFields['user_id'] = auth()->id();
 
         Listing::create($listingFields);
-
-        return redirect('/')->with('message', 'Listing created successfully');
+        return redirect()->route('listing.show')->with('message', 'Listing created successfully');
     }
 
     // Go to an edit mode for a listing
     public function edit(Listing $listing) {
-        return view('listings.edit', ['listing' => $listing]);
+        return view('listings.edit', compact('listing'));
     }
 
 
@@ -62,8 +61,8 @@ class ListingController extends Controller
             'tags' => 'required',
             'description' => 'required'
         ]);
-        $id->update($formFields);
-        return redirect('/')->with('message', 'Listing updated successfully');
+        $id->update($listingFields);
+        return redirect()->route('listing.show')->with('message', 'Listing updated successfully');
     }
 
     // Manage existing listings

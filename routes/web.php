@@ -19,10 +19,10 @@ Route::post('/logout', [UserController::class, 'logout'])->name('user.logout');
 
 // Find Listings
 
-Route::get('/listings/form', [ListingController::class, 'showlistingsform'])->name('listings.form');
+Route::get('/listings/form', [ListingController::class, 'showlistingsform'])->name('listing.form');
 Route::get('/listings/manage', [ListingController::class, 'manage']);
-Route::get('/listings/{id}/edit', [ListingController::class, 'edit'])->name('listing.edit');
-Route::get('/listings/{id}', [ListingController::class, 'singlelisting']);
+Route::get('/listings/{listing}', [ListingController::class, 'singlelisting'])->name('listing.single');
+Route::get('/listings/{listing}/edit', [ListingController::class, 'edit'])->name('listing.edit');
 Route::post('/listings/form', [ListingController::class, 'createlisting'])->name('listing.create');
 Route::put('/listings/{id}', [ListingController::class, 'update'])->name('listing.update');
 Route::delete('/listings/{id}', [ListingController::class, 'destroy'])->name('listing.destroy');

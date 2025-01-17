@@ -41,7 +41,6 @@
                     </td>
                 </tr>
                 @endunless
-
             </tbody>
         </table>
     </x-card>

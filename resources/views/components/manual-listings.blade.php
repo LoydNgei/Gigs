@@ -3,8 +3,9 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <div class="section_title">
-                        <h3>Job Listing</h3>
+                    <div class="slider_text">
+                        <h1 class ="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">Job Listing</h1>
+                        <h5 class="wow fadeInLeft" data-wow-duration="1s" data-wow-delay=".2s">100+ Jobs listed</h5>
                     </div>
                 </div>
                 <div class="col-lg-6">

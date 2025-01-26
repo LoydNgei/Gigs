@@ -15,14 +15,14 @@
                             <div class="main-menu  d-none d-lg-block">
                                 <nav>
                                     <ul id="navigation">
-                                        <li><a href="index.html">home</a></li>
-                                        <li><a href="jobs.html">Browse Job</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="{{route('home')}}">home</a></li>
+                                        <li><a href="{{route('listing.show')}}">Browse Job</a></li>
+                                        <li><a href="#">Contact</a></li>
                                     </ul>
                                 </nav>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+                        {{-- <div class="col-xl-3 col-lg-3 d-none d-lg-block">
                             <div class="Appointment">
                                 <div class="phone_num d-none d-xl-block">
                                     <a href="#">Log in</a>
@@ -31,7 +31,7 @@
                         </div>
                         <div class="col-12">
                             <div class="mobile_menu d-block d-lg-none"></div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>

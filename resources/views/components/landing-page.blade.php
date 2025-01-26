@@ -14,7 +14,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="searching_text">
-                                        <a href="{{route('listing.form') }}" class="boxed-btn3 w-50">Post a Job</a>
+                                        <a href="{{ route('dashboard') }}" class="boxed-btn3 w-50">Post a Job</a>
                                     </div>
                                 </div>
                             </div>

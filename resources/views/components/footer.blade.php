@@ -78,7 +78,7 @@
                                 <input type="text" placeholder="Enter your mail">
                                 <button type="submit">Subscribe</button>
                             </form>
-                            <p class="newsletter_text">We are here to serve</p>
+                            <p class="newsletter_text">We are here to serve you!</p>
                         </div>
                     </div>
                 </div>

@@ -71,10 +71,26 @@ class ListingController extends Controller
     }
 
     // Delete a Listing
-
     public function destroy(Listing $id) {
         $id->delete();
         return redirect('/')->with('message', 'Listing deleted successfully');
+    }
+
+
+    // Admin(Job poster) dashboard
+    public function dashboard() {
+        if(!auth()->check()) {
+            return redirect()->route('login')->with('error', 'You must login first');
+        } 
+        return view('listings.admindashboard');
+    }
+
+    // View applications
+
+    public function viewapplications() {
+
+        $applications = auth()->user()->applications()->latest()->get();
+        return view('listings.applications', compact('applications'));
     }
 
 }

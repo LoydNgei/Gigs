@@ -1,5 +1,12 @@
 <x-layout>
-
+    <div class="navbar bg-primary text-white p-3 d-flex justify-content-between align-items-center">
+        {{-- <h5 class="mb-0"></h5> --}}
+        <div class="text-white py-2 px-2 rounded hover:bg-red-400 transition duration-300">
+            <a href="{{route('listing.manage')}}" class="inline-block text-black ml-2 mb-2"><i class="fa-solid fa-arrow-left"></i>
+                Back
+            </a>           
+        </div>
+    </div>
     <x-card class="p-10 max-w-lg mx-auto mt-24">
         <header class="text-center">
             <h2 class="text-2xl font-bold uppercase mb-1">
@@ -85,9 +92,11 @@
 
             <div class="mb-6">
                 <button class="bg-laravel text-white rounded py-2 px-4 hover:bg-black">
-                    Update Gig
+                    <a href="{{route('listing.manage')}}">
+                        Update Gig
+                    </a>
                 </button>
-                <a href="{{route('home')}}" class="text-black ml-4"> Back </a>
+                <a href="{{route('dashboard')}}" class="text-black ml-4"> Back </a>
             </div>
         </form>
     </x-card>

@@ -6,9 +6,11 @@
   <title>Gigs</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="shortcut icon" type="image/x-icon" href="{{ Vite::asset('img/favicon.png') }}">
+  <link rel="shortcut icon" type="image/x-icon" href="{{ Vite::asset('resources/img/favicon.png') }}">
 
-  @vite(['resources/css/bootstrap.min.css',
+  @vite(['resources/im/favicon.png',
+         'resources/img/logo.png',
+         'resources/css/bootstrap.min.css',
          'resources/css/owl.carousel.min.css',
          'resources/css/magnific-popup.css',
          'resources/css/font-awesome.min.css',

@@ -1,33 +1,39 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+use Inertia\Response;
 use App\Models\Listing;
-use App\Models\User;
 
 class ListingController extends Controller
 {
-    // Show all listings
-    public function showlistings() {
-        // Add pagination on the listing later
-        $listings = Listing::all();
-        return view('listings.index', compact('listings'));
+    public function showlistings(): Response
+    {
+        $listings = Listing::latest()->get();
+
+        return Inertia::render('Listings/Index', [
+            'listings' => $listings,
+        ]);
     }
 
-    // Show a single listing
-    public function singlelisting(Listing $listing){
-        return view('listings.singlelisting', compact('listing'));
+    public function singlelisting(Listing $listing): Response
+    {
+        return Inertia::render('Listings/Show', [
+            'listing' => $listing,
+        ]);
     }
 
-    // Show listing form
-    public function showlistingsform() {
-        return view('listings.form');
+    public function showlistingsform(): Response
+    {
+        return Inertia::render('Listings/Form');
     }
 
-    // Store the listing information
-    public function createlisting(Request $request) {
+    public function createlisting(Request $request): \Illuminate\Http\RedirectResponse
+    {
         $listingFields = $request->validate([
             'title' => 'required',
             'company' => ['required', Rule::unique('listings', 'company')],
@@ -41,56 +47,59 @@ class ListingController extends Controller
         $listingFields['user_id'] = auth()->id();
 
         Listing::create($listingFields);
-        return redirect()->route('listing.show')->with('message', 'Listing created successfully');
+
+        return redirect()->route('listings.index')->with('message', 'Listing created successfully');
     }
 
-    // Go to an edit mode for a listing
-    public function edit(Listing $listing) {
-        return view('listings.edit', compact('listing'));
+    public function edit(Listing $listing): Response
+    {
+        return Inertia::render('Listings/Edit', [
+            'listing' => $listing,
+        ]);
     }
 
-
-    // Update a listing
-    public function update(Request $request, Listing $id) {
+    public function update(Request $request, Listing $listing): \Illuminate\Http\RedirectResponse
+    {
         $listingFields = $request->validate([
             'title' => 'required',
-            'company' => ['required'],
+            'company' => 'required',
             'location' => 'required',
             'website' => 'required',
             'email' => ['required', 'email'],
             'tags' => 'required',
             'description' => 'required'
         ]);
-        $id->update($listingFields);
-        return redirect()->route('listing.show')->with('message', 'Listing updated successfully');
+
+        $listing->update($listingFields);
+
+        return redirect()->route('listings.index')->with('message', 'Listing updated successfully');
     }
 
-    // Manage existing listings
-    public function manage() {
-        return view('listings.manage', ['listings' => auth()->user()->listings()->get()]);
+    public function manage(): Response
+    {
+        return Inertia::render('Listings/Manage', [
+            'listings' => auth()->user()->listings()->get(),
+        ]);
     }
 
-    // Delete a Listing
-    public function destroy(Listing $id) {
-        $id->delete();
-        return redirect('/')->with('message', 'Listing deleted successfully');
+    public function destroy(Listing $listing): \Illuminate\Http\RedirectResponse
+    {
+        $listing->delete();
+
+        return redirect()->route('listings.index')->with('message', 'Listing deleted successfully');
     }
 
-
-    // Admin(Job poster) dashboard
-    public function dashboard() {
-        if(!auth()->check()) {
-            return redirect()->route('login')->with('error', 'You must login first');
-        } 
-        return view('listings.admindashboard');
+    public function dashboard(): Response
+    {
+        return Inertia::render('Listings/AdminDashboard');
     }
 
-    // View applications
-
-    public function viewapplications() {
-
+    public function viewapplications(): Response
+    {
         $applications = auth()->user()->applications()->latest()->get();
-        return view('listings.applications', compact('applications'));
-    }
 
+        return Inertia::render('Listings/Applications', [
+            'applications' => $applications,
+        ]);
+    }
 }
